@@ -3,6 +3,41 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const heartArry = document.querySelectorAll('.media-post footer ul li span')
+const errorModal = document.getElementById('modal')
+errorModal.className = 'hidden'
+
+heartArry.forEach( element => element.addEventListener('click', actionFunction))
+
+
+
+
+
+
+function actionFunction(event){
+  
+  mimicServerCall()
+  .then(()=>{
+    let heartIcon = event.target
+
+    if (heartIcon.innerHTML === FULL_HEART){
+      heartIcon.innerHTML = EMPTY_HEART
+    }else {
+      heartIcon.innerHTML = FULL_HEART
+    }
+  
+    console.log ('It was clicked')
+  })
+  .catch((error) =>{
+    errorModal.className = ''
+  }) 
+
+
+  
+  
+
+}
+
 
 
 
@@ -10,7 +45,6 @@ const FULL_HEART = '♥'
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
 //------------------------------------------------------------------------------
-
 function mimicServerCall(url="http://mimicServer.example.com", config={}) {
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
